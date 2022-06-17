@@ -4,14 +4,17 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
 
+    [SerializeField] GameObject endGame;
+    [Header("Tags")]
     [SerializeField] string obstacleTag;
+    [SerializeField] string endTag;
     [Header("Moviments")]
     [SerializeField] Transform target;
     [SerializeField] float lerpSpeed;
     [SerializeField] float speed;
 
     Vector3 _desiredPos;
-    bool _canRun = true;
+    bool _canRun;
 
     // Update is called once per frame
     void Update() {
@@ -21,9 +24,20 @@ public class PlayerController : MonoBehaviour {
         transform.Translate(transform.forward * speed * Time.deltaTime);
     }
 
-    private void OnCollisionEnter(Collision collision) {
-        if (collision.transform.tag == obstacleTag) {
-            _canRun = false;
-        }
+    void OnCollisionEnter(Collision collision) {
+        if (collision.transform.tag == obstacleTag) EndGame();
+    }
+
+    void OnTriggerEnter(Collider collider) {
+        if (collider.transform.tag == endTag) EndGame();
+    }
+
+    void EndGame() {
+        _canRun = false;
+        endGame.SetActive(true);
+    }
+
+    public void StartGame() {
+        _canRun = true;
     }
 }
