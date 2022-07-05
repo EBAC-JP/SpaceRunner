@@ -5,7 +5,7 @@ using UnityEngine;
 public class PowerUpBase : CollactableBase {
 
     [Header("PowerUp")]
-    [SerializeField] float duration;
+    [SerializeField] protected float duration;
 
     protected override void OnCollect() {
         base.OnCollect();

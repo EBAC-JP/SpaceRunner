@@ -2,17 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PowerUpSpeed : PowerUpBase {
-
-    [SerializeField] float speedUp;
+public class PowerUpInvencible : PowerUpBase {
 
     protected override void StartPowerUp() {
         base.StartPowerUp();
-        PlayerController.Instance.SpeedUp(speedUp);
+        PlayerController.Instance.SetInvencible(true, duration);
     }
 
     protected override void EndPowerUp() {
-        Debug.Log("Entrei");
-        PlayerController.Instance.ResetSpeed();
+        PlayerController.Instance.SetInvencible(false);
     }
 }

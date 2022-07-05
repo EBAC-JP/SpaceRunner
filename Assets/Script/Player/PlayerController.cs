@@ -14,11 +14,14 @@ public class PlayerController : Singleton<PlayerController> {
     [SerializeField] float speed;
 
     Vector3 _desiredPos;
-    bool _canRun;
+    bool _canRun, _invencible;
     float _currentSpeed;
+    MeshRenderer _myMesh;
 
     void Start() {
+        SetComponents();
         ResetSpeed();
+        SetInvencible(false);
     }
 
     // Update is called once per frame
@@ -30,7 +33,7 @@ public class PlayerController : Singleton<PlayerController> {
     }
 
     void OnCollisionEnter(Collision collision) {
-        if (collision.transform.tag == obstacleTag) EndGame();
+        if (collision.transform.tag == obstacleTag && !_invencible) EndGame();
     }
 
     void OnTriggerEnter(Collider collider) {
@@ -40,6 +43,18 @@ public class PlayerController : Singleton<PlayerController> {
     void EndGame() {
         _canRun = false;
         endGame.SetActive(true);
+    }
+
+    void SetComponents() {
+        _myMesh = GetComponent<MeshRenderer>();
+    }
+
+    IEnumerator PlayInvencible(float duration) {
+
+        for (int i = 0; i <= duration * 5; i++) {
+            _myMesh.enabled = !_myMesh.enabled;
+            yield return new WaitForSeconds(0.2f);
+        }
     }
 
     public void StartGame() {
@@ -52,5 +67,10 @@ public class PlayerController : Singleton<PlayerController> {
 
     public void ResetSpeed() {
         _currentSpeed = speed;
+    }
+
+    public void SetInvencible(bool value, float duration = 0f) {
+        _invencible = value;
+        if (_invencible) StartCoroutine(PlayInvencible(duration));
     }
 }
