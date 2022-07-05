@@ -12,7 +12,6 @@ public class PowerUpSpeed : PowerUpBase {
     }
 
     protected override void EndPowerUp() {
-        Debug.Log("Entrei");
         PlayerController.Instance.ResetSpeed();
     }
 }

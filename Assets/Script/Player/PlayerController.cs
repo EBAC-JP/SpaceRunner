@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class PlayerController : Singleton<PlayerController> {
 
@@ -13,13 +14,13 @@ public class PlayerController : Singleton<PlayerController> {
     [SerializeField] float lerpSpeed;
     [SerializeField] float speed;
 
-    Vector3 _desiredPos;
+    Vector3 _desiredPos, _startPosition;
     bool _canRun, _invencible;
     float _currentSpeed;
     MeshRenderer _myMesh;
 
     void Start() {
-        SetComponents();
+        SetVariables();
         ResetSpeed();
         SetInvencible(false);
     }
@@ -45,8 +46,9 @@ public class PlayerController : Singleton<PlayerController> {
         endGame.SetActive(true);
     }
 
-    void SetComponents() {
+    void SetVariables() {
         _myMesh = GetComponent<MeshRenderer>();
+        _startPosition = transform.position;
     }
 
     IEnumerator PlayInvencible(float duration) {
@@ -72,5 +74,13 @@ public class PlayerController : Singleton<PlayerController> {
     public void SetInvencible(bool value, float duration = 0f) {
         _invencible = value;
         if (_invencible) StartCoroutine(PlayInvencible(duration));
+    }
+
+    public void ChangeHeight(float amount, float animationDuration) {
+        transform.DOMoveY(_startPosition.y + amount, animationDuration);
+    }
+
+    public void ResetHeight(float animationDuration) {
+        transform.DOMoveY(_startPosition.y, animationDuration);
     }
 }
