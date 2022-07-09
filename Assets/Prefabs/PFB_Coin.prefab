@@ -58,12 +58,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68837833b08d0c943a0fbd42317fe492, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetTag: Player
+  targetTag: CoinCollector
   particle: {fileID: 0}
   audioSource: {fileID: 0}
-  value: 1
   deathDelay: 0
   graphicItem: {fileID: 1764081021053439725}
+  lerpSpeed: 5
+  minDistance: 1
 --- !u!1 &1764081021053439725
 GameObject:
   m_ObjectHideFlags: 0

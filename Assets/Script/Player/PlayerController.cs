@@ -6,6 +6,7 @@ using DG.Tweening;
 public class PlayerController : Singleton<PlayerController> {
 
     [SerializeField] GameObject endGame;
+    [SerializeField] GameObject coinCollector;
     [Header("Tags")]
     [SerializeField] string obstacleTag;
     [SerializeField] string endTag;
@@ -82,5 +83,9 @@ public class PlayerController : Singleton<PlayerController> {
 
     public void ResetHeight(float animationDuration) {
         transform.DOMoveY(_startPosition.y, animationDuration);
+    }
+
+    public void ChangeCoinCollector(float amount) {
+        coinCollector.transform.localScale = Vector3.one * amount;
     }
 }
