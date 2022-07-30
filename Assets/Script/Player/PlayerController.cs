@@ -7,6 +7,8 @@ public class PlayerController : Singleton<PlayerController> {
 
     [SerializeField] GameObject endGame;
     [SerializeField] GameObject coinCollector;
+    [Header("Animation")]
+    [SerializeField] AnimationManager animationManager;
     [SerializeField] GameObject playerModel;
     [Header("Tags")]
     [SerializeField] string obstacleTag;
@@ -15,6 +17,7 @@ public class PlayerController : Singleton<PlayerController> {
     [SerializeField] Transform target;
     [SerializeField] float lerpSpeed;
     [SerializeField] float speed;
+    
 
     Vector3 _desiredPos, _startPosition;
     bool _canRun, _invencible;
@@ -36,15 +39,19 @@ public class PlayerController : Singleton<PlayerController> {
     }
 
     void OnCollisionEnter(Collision collision) {
-        if (collision.transform.tag == obstacleTag && !_invencible) EndGame();
+        if (collision.transform.tag == obstacleTag && !_invencible) {
+            collision.transform.DOMoveZ(1f, .3f).SetRelative();
+            EndGame(AnimationManager.AnimationType.DEATH);
+        }
     }
 
     void OnTriggerEnter(Collider collider) {
         if (collider.transform.tag == endTag) EndGame();
     }
 
-    void EndGame() {
+    void EndGame(AnimationManager.AnimationType type = AnimationManager.AnimationType.IDLE) {
         _canRun = false;
+        animationManager.Play(type);
         endGame.SetActive(true);
     }
 
@@ -65,6 +72,7 @@ public class PlayerController : Singleton<PlayerController> {
 
     public void StartGame() {
         _canRun = true;
+        animationManager.Play(AnimationManager.AnimationType.RUN);
     }
 
     public void SpeedUp(float amount) {

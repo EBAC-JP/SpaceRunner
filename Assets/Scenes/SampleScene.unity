@@ -1184,6 +1184,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5156129202013452133, guid: 89e20167823a30d459856414377997d1, type: 3}
   m_PrefabInstance: {fileID: 1152148753}
   m_PrefabAsset: {fileID: 0}
+--- !u!95 &897201026 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 7193805671317595757, guid: 89e20167823a30d459856414377997d1, type: 3}
+  m_PrefabInstance: {fileID: 1152148753}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -1976,7 +1981,7 @@ GameObject:
   - component: {fileID: 1643536480}
   - component: {fileID: 1643536479}
   - component: {fileID: 1643536478}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: EndLine
   m_TagString: EndLine
   m_Icon: {fileID: 0}
@@ -2180,6 +2185,7 @@ GameObject:
   - component: {fileID: 1818777712}
   - component: {fileID: 1818777716}
   - component: {fileID: 1818777717}
+  - component: {fileID: 1818777711}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -2187,6 +2193,26 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &1818777711
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1818777710}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a0d2576b46d2054990eeda43c6e8ad4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 897201026}
+  animationSetups:
+  - type: 0
+    triggerName: PlayerIdle
+  - type: 1
+    triggerName: PlayerRun
+  - type: 2
+    triggerName: PlayerDeath
 --- !u!65 &1818777712
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2295,6 +2321,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   endGame: {fileID: 1436327113}
   coinCollector: {fileID: 1885489408}
+  animationManager: {fileID: 1818777711}
   playerModel: {fileID: 381361577}
   obstacleTag: Obstacle
   endTag: EndLine
