@@ -7,6 +7,7 @@ public class PlayerController : Singleton<PlayerController> {
 
     [SerializeField] GameObject endGame;
     [SerializeField] GameObject coinCollector;
+    [SerializeField] GameObject playerModel;
     [Header("Tags")]
     [SerializeField] string obstacleTag;
     [SerializeField] string endTag;
@@ -18,7 +19,7 @@ public class PlayerController : Singleton<PlayerController> {
     Vector3 _desiredPos, _startPosition;
     bool _canRun, _invencible;
     float _currentSpeed;
-    MeshRenderer _myMesh;
+    List<SkinnedMeshRenderer> _meshRendereres;
 
     void Start() {
         SetVariables();
@@ -48,14 +49,16 @@ public class PlayerController : Singleton<PlayerController> {
     }
 
     void SetVariables() {
-        _myMesh = GetComponent<MeshRenderer>();
         _startPosition = transform.position;
+        _meshRendereres = new List<SkinnedMeshRenderer>(playerModel.GetComponentsInChildren<SkinnedMeshRenderer>());
     }
 
     IEnumerator PlayInvencible(float duration) {
 
         for (int i = 0; i <= duration * 5; i++) {
-            _myMesh.enabled = !_myMesh.enabled;
+            foreach (var mesh in _meshRendereres) {
+                mesh.enabled = !mesh.enabled;
+            }
             yield return new WaitForSeconds(0.2f);
         }
     }
