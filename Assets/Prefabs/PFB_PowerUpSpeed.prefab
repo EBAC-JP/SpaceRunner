@@ -65,7 +65,7 @@ MonoBehaviour:
   deathDelay: 3
   graphicItem: {fileID: 6484225225614858645}
   duration: 3
-  speedUp: 5
+  speedUp: 10
 --- !u!1 &6484225225614858645
 GameObject:
   m_ObjectHideFlags: 0

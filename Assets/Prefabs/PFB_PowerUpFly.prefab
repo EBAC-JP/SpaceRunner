@@ -64,7 +64,7 @@ MonoBehaviour:
   audioSource: {fileID: 0}
   deathDelay: 5
   graphicItem: {fileID: 725938715748664808}
-  duration: 5
+  duration: 3
   amountHeight: 2
   animationDuration: 1
 --- !u!1 &725938715748664808

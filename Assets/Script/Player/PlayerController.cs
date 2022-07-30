@@ -16,7 +16,7 @@ public class PlayerController : Singleton<PlayerController> {
     [Header("Moviments")]
     [SerializeField] Transform target;
     [SerializeField] float lerpSpeed;
-    [SerializeField] float speed;
+    [SerializeField] float baseSpeed;
     
 
     Vector3 _desiredPos, _startPosition;
@@ -72,15 +72,16 @@ public class PlayerController : Singleton<PlayerController> {
 
     public void StartGame() {
         _canRun = true;
-        animationManager.Play(AnimationManager.AnimationType.RUN);
+        animationManager.Play(AnimationManager.AnimationType.RUN, _currentSpeed / baseSpeed);
     }
 
     public void SpeedUp(float amount) {
         _currentSpeed = amount;
+        animationManager.Play(AnimationManager.AnimationType.RUN, _currentSpeed / baseSpeed);
     }
 
     public void ResetSpeed() {
-        _currentSpeed = speed;
+        _currentSpeed = baseSpeed;
     }
 
     public void SetInvencible(bool value, float duration = 0f) {
@@ -90,10 +91,12 @@ public class PlayerController : Singleton<PlayerController> {
 
     public void ChangeHeight(float amount, float animationDuration) {
         transform.DOMoveY(_startPosition.y + amount, animationDuration);
+        animationManager.Play(AnimationManager.AnimationType.RUN, 1 / baseSpeed);
     }
 
     public void ResetHeight(float animationDuration) {
         transform.DOMoveY(_startPosition.y, animationDuration);
+        animationManager.Play(AnimationManager.AnimationType.RUN, _currentSpeed / baseSpeed);
     }
 
     public void ChangeCoinCollector(float amount) {
