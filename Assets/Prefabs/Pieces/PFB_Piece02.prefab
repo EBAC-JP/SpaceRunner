@@ -90,7 +90,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: cfee55eaf177f3042b7a48f0585cdc85, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -175,6 +175,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   endPiece: {fileID: 2737930543145604301}
+  groundColor: {r: 0, g: 0, b: 0, a: 0}
+  ground: {fileID: 2100000, guid: cfee55eaf177f3042b7a48f0585cdc85, type: 2}
   powerUp: {fileID: 6843908957179079432}
   powerUps:
   - {fileID: 725938713960506982, guid: 7fb33e72fe1fc124c8c0b9bbdabd1dae, type: 3}
