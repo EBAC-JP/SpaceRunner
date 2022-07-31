@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LevelManager : MonoBehaviour {
+public class LevelManager : Singleton<LevelManager> {
 
     [SerializeField] Transform levelContainer;
     [Header("Material Colors")]
@@ -17,20 +17,22 @@ public class LevelManager : MonoBehaviour {
     [SerializeField] List<Piece> pieces;
 
     List<Piece> _spawnedPieces = new List<Piece>();
+    int _currentIndex;
 
     void Awake() {
+        _currentIndex = 1;
         CreateLevel();    
     }
 
-    void CreateLevel(int levelIndex = 1) {
-        SetColors();
+    public void CreateLevel() {
         CleanLevel();
-        StartCoroutine(SpawnPieces(levelIndex));
+        SetColors();
+        StartCoroutine(SpawnPieces(_currentIndex));
     }
 
     void CleanLevel() {
         for (int i = _spawnedPieces.Count - 1; i >= 0; i--) {
-            Destroy(_spawnedPieces[i]);
+            Destroy(_spawnedPieces[i].gameObject);
         }
         _spawnedPieces.Clear();
     }
@@ -56,6 +58,7 @@ public class LevelManager : MonoBehaviour {
         var lastPiece = _spawnedPieces[_spawnedPieces.Count - 1];
         var spawned = Instantiate(finishPiece, levelContainer);
         spawned.transform.position = lastPiece.endPiece.position;
+        _spawnedPieces.Add(spawned);
     }
 
     IEnumerator SpawnPieces(int levelIndex) {
@@ -65,6 +68,7 @@ public class LevelManager : MonoBehaviour {
             yield return new WaitForSeconds(timeBetweenPieces);
         }
         SpawnEndPiece();
+        _currentIndex++;
     }
 
 }

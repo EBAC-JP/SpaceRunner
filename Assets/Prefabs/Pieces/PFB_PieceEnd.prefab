@@ -27,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4842102400799188955}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.6, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4842102401073964017}
@@ -143,8 +143,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   endPiece: {fileID: 0}
-  groundColor: {r: 0, g: 0, b: 0, a: 0}
-  ground: {fileID: 2100000, guid: cfee55eaf177f3042b7a48f0585cdc85, type: 2}
   powerUp: {fileID: 0}
   powerUps: []
 --- !u!1 &6502621882464816747
@@ -171,7 +169,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6502621882464816747}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 7582919697228515553}
@@ -197,7 +195,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3224960786340181132, guid: bb2304acfefc7ba4f9e3105a12c5bbae, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.6
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3224960786340181132, guid: bb2304acfefc7ba4f9e3105a12c5bbae, type: 3}
       propertyPath: m_LocalPosition.z

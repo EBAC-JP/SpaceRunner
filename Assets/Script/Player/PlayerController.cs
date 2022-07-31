@@ -6,7 +6,9 @@ using DG.Tweening;
 public class PlayerController : Singleton<PlayerController> {
 
     [SerializeField] GameObject endGame;
+    [SerializeField] GameObject nextLevel;
     [SerializeField] GameObject coinCollector;
+    [SerializeField] Vector3 startPosition;
     [Header("Animation")]
     [SerializeField] AnimationManager animationManager;
     [SerializeField] GameObject playerModel;
@@ -41,17 +43,24 @@ public class PlayerController : Singleton<PlayerController> {
     void OnCollisionEnter(Collision collision) {
         if (collision.transform.tag == obstacleTag && !_invencible) {
             collision.transform.DOMoveZ(1f, .3f).SetRelative();
-            EndGame(AnimationManager.AnimationType.DEATH);
+            EndGame();
         }
     }
 
     void OnTriggerEnter(Collider collider) {
-        if (collider.transform.tag == endTag) EndGame();
+        if (collider.transform.tag == endTag) NextLevel();
     }
 
-    void EndGame(AnimationManager.AnimationType type = AnimationManager.AnimationType.IDLE) {
+    void NextLevel() {
         _canRun = false;
-        animationManager.Play(type);
+        animationManager.Play(AnimationManager.AnimationType.IDLE);
+        transform.position = startPosition;
+        nextLevel.SetActive(true);
+    }
+
+    void EndGame() {
+        _canRun = false;
+        animationManager.Play(AnimationManager.AnimationType.DEATH);
         endGame.SetActive(true);
     }
 
