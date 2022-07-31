@@ -5,7 +5,11 @@ using UnityEngine;
 public class LevelManager : MonoBehaviour {
 
     [SerializeField] Transform levelContainer;
-    [SerializeField] List<Color> colors;
+    [Header("Material Colors")]
+    [SerializeField] Material groundMaterial;
+    [SerializeField] Material obstacleMaterial;
+    [SerializeField] List<Color> groundColors;
+    [SerializeField] List<Color> obstacleColors;
     [Header("Pieces")]
     [SerializeField] float timeBetweenPieces;
     [SerializeField] Piece startPiece;
@@ -19,6 +23,7 @@ public class LevelManager : MonoBehaviour {
     }
 
     void CreateLevel(int levelIndex = 1) {
+        SetColors();
         CleanLevel();
         StartCoroutine(SpawnPieces(levelIndex));
     }
@@ -30,38 +35,36 @@ public class LevelManager : MonoBehaviour {
         _spawnedPieces.Clear();
     }
 
-    void SpawnStartPiece(Color color) {
-        var piece = startPiece;
-        piece.groundColor = color;
-        var spawned = Instantiate(piece, levelContainer);
+    void SetColors() {
+        groundMaterial.SetColor("_Color", groundColors[Random.Range(0, groundColors.Count)]);
+        obstacleMaterial.SetColor("_Color", obstacleColors[Random.Range(0, obstacleColors.Count)]);
+    }
+
+    void SpawnStartPiece() {
+        var spawned = Instantiate(startPiece, levelContainer);
         _spawnedPieces.Add(spawned);
     }
 
-    void SpawnMidPiece(Color color) {
+    void SpawnMidPiece() {
         var lastPiece = _spawnedPieces[_spawnedPieces.Count - 1];
-        var piece = pieces[Random.Range(0, pieces.Count)];
-        piece.groundColor = color;
-        var spawned = Instantiate(piece, levelContainer);
+        var spawned = Instantiate(pieces[Random.Range(0, pieces.Count)], levelContainer);
         spawned.transform.position = lastPiece.endPiece.position;
         _spawnedPieces.Add(spawned);
     }
 
-    void SpawnEndPiece(Color color) {
-        var piece = finishPiece;
-        piece.groundColor = color;
+    void SpawnEndPiece() {
         var lastPiece = _spawnedPieces[_spawnedPieces.Count - 1];
-        var spawned = Instantiate(piece, levelContainer);
+        var spawned = Instantiate(finishPiece, levelContainer);
         spawned.transform.position = lastPiece.endPiece.position;
     }
 
     IEnumerator SpawnPieces(int levelIndex) {
-        Color randomColor = colors[Random.Range(0, colors.Count)];
-        SpawnStartPiece(randomColor);
+        SpawnStartPiece();
         for (int i = 0; i < levelIndex * 3; i++) {
-            SpawnMidPiece(randomColor);
+            SpawnMidPiece();
             yield return new WaitForSeconds(timeBetweenPieces);
         }
-        SpawnEndPiece(randomColor);
+        SpawnEndPiece();
     }
 
 }

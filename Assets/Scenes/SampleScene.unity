@@ -1095,12 +1095,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelContainer: {fileID: 1176091876}
-  colors:
-  - {r: 0.6226415, g: 0.6226415, b: 0.6226415, a: 0}
-  - {r: 0.6603774, g: 0.4510577, b: 0.08410467, a: 0}
-  - {r: 0.79520565, g: 1, b: 0.7688679, a: 0}
-  - {r: 0.8867924, g: 0.53960484, b: 0.7032503, a: 0}
-  - {r: 0.5990566, g: 0.6713273, b: 1, a: 0}
+  groundMaterial: {fileID: 2100000, guid: cfee55eaf177f3042b7a48f0585cdc85, type: 2}
+  obstacleMaterial: {fileID: 2100000, guid: bcd5904006840bb4fb31269d1664c3bb, type: 2}
+  groundColors:
+  - {r: 1, g: 1, b: 1, a: 0}
+  - {r: 0.6037736, g: 0.6037736, b: 0.6037736, a: 0}
+  - {r: 0.99615145, g: 1, b: 0.7122642, a: 0}
+  - {r: 0.7185559, g: 1, b: 0.7028302, a: 0}
+  - {r: 0.6933962, g: 0.73527026, b: 1, a: 0}
+  obstacleColors:
+  - {r: 0, g: 0, b: 0, a: 0}
+  - {r: 1, g: 0, b: 0, a: 0}
+  - {r: 0.46226418, g: 0, b: 0.25292438, a: 0}
+  - {r: 1, g: 0.49694997, b: 0, a: 0}
+  - {r: 1, g: 0, b: 0.797163, a: 0}
   timeBetweenPieces: 0.3
   startPiece: {fileID: 3538495134983949031, guid: fc308f05317fdec4c80dc326b4fc8c16, type: 3}
   finishPiece: {fileID: 8729381730806676049, guid: 384d634da97b1374fb6189151f3fdad8, type: 3}
