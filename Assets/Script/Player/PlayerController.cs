@@ -22,7 +22,7 @@ public class PlayerController : Singleton<PlayerController> {
     
 
     Vector3 _desiredPos, _startPosition;
-    bool _canRun, _invencible;
+    bool _canRun, _invencible, _dead;
     float _currentSpeed;
     List<SkinnedMeshRenderer> _meshRendereres;
 
@@ -60,7 +60,10 @@ public class PlayerController : Singleton<PlayerController> {
 
     void EndGame() {
         _canRun = false;
-        animationManager.Play(AnimationManager.AnimationType.DEATH);
+        if (!_dead) {
+            animationManager.Play(AnimationManager.AnimationType.DEATH);
+            _dead = true;
+        }
         endGame.SetActive(true);
     }
 
