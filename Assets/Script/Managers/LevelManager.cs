@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class LevelManager : Singleton<LevelManager> {
 
@@ -11,10 +12,13 @@ public class LevelManager : Singleton<LevelManager> {
     [SerializeField] List<Color> groundColors;
     [SerializeField] List<Color> obstacleColors;
     [Header("Pieces")]
-    [SerializeField] float timeBetweenPieces;
     [SerializeField] Piece startPiece;
     [SerializeField] Piece finishPiece;
     [SerializeField] List<Piece> pieces;
+    [Header("Animation")]
+    [SerializeField] float scaleDuration;
+    [SerializeField] float scaleBetweenPieces;
+    [SerializeField] Ease ease;
 
     List<Piece> _spawnedPieces = new List<Piece>();
     int _currentIndex;
@@ -27,7 +31,7 @@ public class LevelManager : Singleton<LevelManager> {
     public void CreateLevel() {
         CleanLevel();
         SetColors();
-        StartCoroutine(SpawnPieces(_currentIndex));
+        SpawnPieces(_currentIndex);
     }
 
     void CleanLevel() {
@@ -61,14 +65,25 @@ public class LevelManager : Singleton<LevelManager> {
         _spawnedPieces.Add(spawned);
     }
 
-    IEnumerator SpawnPieces(int levelIndex) {
+    void SpawnPieces(int levelIndex) {
         SpawnStartPiece();
         for (int i = 0; i < levelIndex * 3; i++) {
             SpawnMidPiece();
-            yield return new WaitForSeconds(timeBetweenPieces);
         }
         SpawnEndPiece();
+        StartCoroutine(ScalePieces());
         _currentIndex++;
+    }
+
+    IEnumerator ScalePieces() {
+        foreach (var spawned in _spawnedPieces) {
+            spawned.transform.localScale = Vector3.zero;
+        }
+        yield return null;
+        foreach (var spawned in _spawnedPieces) {
+            spawned.transform.DOScale(1, scaleDuration).SetEase(ease);
+            yield return new WaitForSeconds(scaleBetweenPieces);
+        }
     }
 
 }
