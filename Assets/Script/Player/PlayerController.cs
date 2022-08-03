@@ -12,6 +12,8 @@ public class PlayerController : Singleton<PlayerController> {
     [Header("Animation")]
     [SerializeField] AnimationManager animationManager;
     [SerializeField] GameObject playerModel;
+    [SerializeField] float duration;
+    [SerializeField] Ease ease;
     [Header("Tags")]
     [SerializeField] string obstacleTag;
     [SerializeField] string endTag;
@@ -55,6 +57,7 @@ public class PlayerController : Singleton<PlayerController> {
         _canRun = false;
         animationManager.Play(AnimationManager.AnimationType.IDLE);
         transform.position = startPosition;
+        transform.localScale = Vector3.zero;
         nextLevel.SetActive(true);
     }
 
@@ -84,6 +87,7 @@ public class PlayerController : Singleton<PlayerController> {
 
     public void StartGame() {
         _canRun = true;
+        transform.DOScale(1f, duration).SetEase(ease);
         animationManager.Play(AnimationManager.AnimationType.RUN, _currentSpeed / baseSpeed);
     }
 
