@@ -19,6 +19,7 @@ public class CollactableBase : MonoBehaviour {
     protected virtual void OnCollect() {
         if (particle != null) particle.Play();
         if (audioSource != null) audioSource.Play();
+        PlayerController.Instance.Bounce();
     }
 
     private void OnTriggerEnter(Collider collider) {

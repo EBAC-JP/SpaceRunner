@@ -20,7 +20,6 @@ public class Coin : CollactableBase {
     protected override void OnCollect() {
         base.OnCollect();
         _collect = true;
-        PlayerController.Instance.Bounce();
     }
 
     protected override void Collect() {
