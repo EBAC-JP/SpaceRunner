@@ -63,8 +63,8 @@ MonoBehaviour:
   audioSource: {fileID: 0}
   deathDelay: 0
   graphicItem: {fileID: 1764081021053439725}
-  lerpSpeed: 5
-  minDistance: 1.2
+  lerpSpeed: 10
+  minDistance: 1
 --- !u!1 &1764081021053439725
 GameObject:
   m_ObjectHideFlags: 0
