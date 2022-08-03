@@ -27,6 +27,7 @@ public class PlayerController : Singleton<PlayerController> {
     bool _canRun, _invencible, _dead;
     float _currentSpeed;
     List<SkinnedMeshRenderer> _meshRendereres;
+    BounceHelper _bounceHelper;
 
     void Start() {
         SetVariables();
@@ -72,6 +73,7 @@ public class PlayerController : Singleton<PlayerController> {
 
     void SetVariables() {
         _startPosition = transform.position;
+        _bounceHelper = GetComponent<BounceHelper>();
         _meshRendereres = new List<SkinnedMeshRenderer>(playerModel.GetComponentsInChildren<SkinnedMeshRenderer>());
     }
 
@@ -117,5 +119,9 @@ public class PlayerController : Singleton<PlayerController> {
 
     public void ChangeCoinCollector(float amount) {
         coinCollector.transform.localScale = Vector3.one * amount;
+    }
+
+    public void Bounce() {
+        _bounceHelper.Bounce();
     }
 }
