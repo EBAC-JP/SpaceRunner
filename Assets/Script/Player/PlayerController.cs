@@ -22,6 +22,7 @@ public class PlayerController : Singleton<PlayerController> {
     [SerializeField] Transform target;
     [SerializeField] float lerpSpeed;
     [SerializeField] float baseSpeed;
+    [SerializeField] Vector2 limit;
     
 
     Vector3 _desiredPos, _startPosition;
@@ -40,6 +41,8 @@ public class PlayerController : Singleton<PlayerController> {
     void Update() {
         if (!_canRun) return;
         _desiredPos = new Vector3(target.position.x, transform.position.y, transform.position.z);
+        if (_desiredPos.x < limit.x) _desiredPos.x = limit.x;
+        if (_desiredPos.x > limit.y) _desiredPos.x = limit.y;
         transform.position = Vector3.Lerp(transform.position, _desiredPos, lerpSpeed * Time.deltaTime);
         transform.Translate(transform.forward * _currentSpeed * Time.deltaTime);
     }

@@ -2012,6 +2012,7 @@ MonoBehaviour:
   target: {fileID: 310304937}
   lerpSpeed: 5
   baseSpeed: 7
+  limit: {x: -4, y: 4}
 --- !u!114 &1818777718
 MonoBehaviour:
   m_ObjectHideFlags: 0
