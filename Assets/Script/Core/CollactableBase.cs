@@ -7,8 +7,8 @@ public class CollactableBase : MonoBehaviour {
     [SerializeField] string targetTag;
     [SerializeField] ParticleSystem particle;
     [SerializeField] AudioSource audioSource;
-    [SerializeField] float deathDelay;
-    [SerializeField] GameObject graphicItem;
+    [SerializeField] protected GameObject graphicItem;
+    [SerializeField] protected float deathDelay;
 
     protected virtual void Collect() {
         if (graphicItem != null) graphicItem.SetActive(false);

@@ -13,7 +13,10 @@ public class Coin : CollactableBase {
     void Update() {
         if (_collect) {
             transform.position = Vector3.Lerp(transform.position, PlayerController.Instance.transform.position, lerpSpeed * Time.deltaTime);
-            if (Vector3.Distance(transform.position, PlayerController.Instance.transform.position) <= minDistance) Destroy(gameObject);
+            if (Vector3.Distance(transform.position, PlayerController.Instance.transform.position) <= minDistance) {
+                if (graphicItem != null) graphicItem.SetActive(false);
+                Destroy(gameObject, deathDelay);
+            }
         }
     }
 
