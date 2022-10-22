@@ -11,6 +11,7 @@ public class PlayerController : Singleton<PlayerController> {
     [SerializeField] Vector3 startPosition;
     [Header("Animation")]
     [SerializeField] AnimationManager animationManager;
+    [SerializeField] ParticleSystem dieParticle;
     [SerializeField] GameObject playerModel;
     [SerializeField] float duration;
     [SerializeField] Ease ease;
@@ -65,6 +66,7 @@ public class PlayerController : Singleton<PlayerController> {
     void EndGame() {
         _canRun = false;
         if (!_dead) {
+            if (dieParticle != null) dieParticle.Play();
             animationManager.Play(AnimationManager.AnimationType.DEATH);
             _dead = true;
         }
